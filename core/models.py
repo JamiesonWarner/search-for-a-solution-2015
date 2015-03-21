@@ -4,12 +4,12 @@ from django.conf import settings
 class Tag(models.Model):
   name = models.TextField()
   def __unicode__(self):
-    return name
+    return self.name
 
 class Role(models.Model):
   name = models.TextField()
   def __unicode__(self):
-    return name
+    return self.name
 
 class Student(models.Model):
   user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -23,7 +23,7 @@ class Project(models.Model):
   is_sponsored = models.BooleanField(default=False)
   is_completed = models.BooleanField(default=False)
   def __unicode__(self):
-    return title
+    return self.title
 
 class Wanted(models.Model):
   project = models.ForeignKey(Project)
