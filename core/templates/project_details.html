@@ -139,7 +139,7 @@
       </div>
 
       <h3>Comments</h3>
-      {% for comment in project.comment_set.all %}
+      {% for comment in comments %}
       <div class="card">
         <div class="card-metadata">
           <span class="name">{{ comment.user }}</span>
@@ -151,9 +151,11 @@
 
       <div class="card">
         <div class="form-group leave-comment">
-          <input class="form-control" type="text" placeholder="Name"></input>
-          <textarea class="form-control" rows="2" placeholder="Comment"></textarea>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <form method="POST">{% csrf_token %}
+            <input class="form-control" name="name" type="text" placeholder="Name"></input>
+            <textarea class="form-control" name="text" rows="2" placeholder="Comment"></textarea>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
         </div>
       </div>
     </div>

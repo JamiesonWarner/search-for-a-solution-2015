@@ -2,15 +2,27 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework.views import APIView
 from rest_framework import generics
 from .forms import ProjectForm
-from .models import Project, Tag
+from .models import Project, Tag, Comment
 
 def index(request):
   projects = Project.objects.prefetch_related('wanted_set').all().order_by('-created_at')
   return render(request, 'index.html', { 'projects': projects })
 
 def project_details(request, project_id):
+  if request.method == 'POST':
+    comment = Comment(
+      user=request.POST['name'],
+      text=request.POST['text'],
+      project=Project.objects.get(pk=project_id),
+    )
+    try:
+      comment.full_clean()
+      comment.save()
+    except:
+      pass
   project = get_object_or_404(Project, pk=project_id)
-  return render(request, 'project_details.html', { 'project': project })
+  comments = project.comment_set.all().order_by('-created_at')
+  return render(request, 'project_details.html', { 'project': project, 'comments': comments })
 
 def create_project(request):
   form = ProjectForm()
