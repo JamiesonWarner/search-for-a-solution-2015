@@ -11,13 +11,10 @@ class Role(models.Model):
   def __unicode__(self):
     return self.name
 
-class Student(models.Model):
-  user = models.ForeignKey(settings.AUTH_USER_MODEL)
-
 class Project(models.Model):
   title = models.TextField()
   description = models.TextField()
-  owner = models.ForeignKey(Student)
+  owner = models.TextField()
   owner_role = models.ForeignKey(Role)
   tags = models.ManyToManyField(Tag)
   is_sponsored = models.BooleanField(default=False)
@@ -31,5 +28,5 @@ class Wanted(models.Model):
   description = models.TextField()
 
 class Comment(models.Model):
-  user = models.ForeignKey(Student)
+  user = models.TextField()
   text = models.TextField()
