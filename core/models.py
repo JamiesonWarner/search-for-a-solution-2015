@@ -46,3 +46,4 @@ class Comment(models.Model):
   user = models.TextField()
   text = models.TextField()
   project = models.ForeignKey(Project)
+  created_at = models.DateTimeField(auto_now_add=True)

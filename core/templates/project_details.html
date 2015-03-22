@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +23,16 @@
     }
     .header {
       padding-top: 25px;
-      padding-left: 75px;
+      padding-left: 85px;
       height: 125px;
       background-color: #FFFFFF;
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.50);
       font-weight: 700;
       font-size: 36px;
       line-height: 46px;
+    }
+    .logo {
+      margin-right: 20px;
     }
     .main {
       flex: 4;
@@ -46,14 +50,53 @@
       background-color: white;
       border-radius: 4px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
-      padding: 28px 20px;
-      margin: 18px 0;
+      padding: 14px 10px;
+      margin: 9px 0;
     }
     .card-title {
       margin-top: 0;
     }
+    .card-metadata {
+      margin-bottom: 5px;
+    }
+    .card-metadata .name {
+      font-size: 18px;
+      margin-right: 15px;
+    }
+    .card-metadata .time {
+      color: #9B9B9B;
+    }
     textarea {
       margin-bottom: 12px;
+    }
+    .leave-comment {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+    }
+    .yellow {
+      background-color: #FEC63E;
+    }
+    .green {
+      background-color: #ADD4CE;
+    }
+    .peach {
+      background-color: #FFA08A;
+    }
+    .tags {
+      display: flex;
+      flex: 0 0 auto;
+      margin-bottom: 10px;
+    }
+    .tag {
+      height: 20px;
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 
@@ -61,33 +104,49 @@
 <body class="flex-column">
   <div class="flex-row header">
     <a href="/" class="brand">
-      <div><img src="/static/Logo.svg">WiscCollab</div>
+      <div><img src="/static/Logo.svg" class="logo">WiscCollab</div>
     </a>
   </div>
   <div class="flex-row">
     <div class="flex-column main">
       <h1>{{ project.title }}</h1>
-      <div class="card">
+      <div class="flex-column card">
+        <div class="tags">
+          <div class="tag {{ project.color }}">{{ project.owner_role }}</div>
+          seeking
+          {% for tag in project.tags.all %}
+            {% if tag.name == 'designer' %}
+              <div class="tag green">designer</div>
+            {% endif %}
+            {% if tag.name == 'developer' %}
+              <div class="tag yellow">developer</div>
+            {% endif %}
+            {% if tag.name == 'business' %}
+              <div class="tag peach">business</div>
+            {% endif %}
+          {% endfor %}
+        </div>
         {{ project.description }}
       </div>
 
+      <h3>Comments</h3>
       {% for comment in project.comment_set.all %}
       <div class="card">
-        <h4>{{ comment.user }}</h4>
+        <div class="card-metadata">
+          <span class="name">{{ comment.user }}</span>
+          <span class="time">{{ comment.created_at|naturaltime }}</span>
+        </div>
         {{ comment.text }}
       </div>
       {% endfor %}
 
       <div class="card">
-        <div class="form-group">
-          <h3 class="card-title">Leave a comment...</h3>
+        <div class="form-group leave-comment">
           <textarea class="form-control" rows="2"></textarea>
           <button type="submit" class="btn btn-default">Submit</button>
         </div>
       </div>
-
     </div>
   </div>
-
 </body>
 </html>
