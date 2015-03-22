@@ -4,8 +4,8 @@ from core import views
 
 urlpatterns = patterns('',
     url(r'^$', 'core.views.index'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^create_project$', 'core.views.create_project'),
     url(r'^(\d+)$', 'core.views.project_details'),
-    url(r'^api/project', views.ProjectView.as_view()),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^admin/', include(admin.site.urls)),
 )

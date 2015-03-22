@@ -16,7 +16,7 @@ class Project(models.Model):
   description = models.TextField()
   owner = models.TextField()
   owner_email = models.TextField()
-  owner_role = models.ForeignKey(Role)
+  owner_role = models.TextField()
   tags = models.ManyToManyField(Tag)
   is_sponsored = models.BooleanField(default=False)
   is_completed = models.BooleanField(default=False)

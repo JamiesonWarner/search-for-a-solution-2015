@@ -14,10 +14,6 @@ class RoleSerializer(serializers.ModelSerializer):
   class Meta:
     model = Role
 
-class StudentSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Student
-
 class WantedSerializer(serializers.ModelSerializer):
   class Meta:
     model = Wanted
