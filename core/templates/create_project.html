@@ -1,4 +1,138 @@
-<form action="{% url 'core.views.create_project' %}" method="POST">{% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">Submit</button>
-</form>
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <style type="text/css">
+    body {
+      background-color: #F6F3F3;
+      font-family: 'PT Sans', sans-serif;
+      color: #24132F;
+    }
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+    }
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .header {
+      padding-top: 25px;
+      padding-left: 85px;
+      height: 125px;
+      background-color: #FFFFFF;
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.50);
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 46px;
+    }
+    .logo {
+      margin-right: 20px;
+    }
+    .main {
+      flex: 4;
+      padding: 35px 85px;
+    }
+    .tagline {
+      font-size: 24px;
+      line-height: 32px;
+    }
+    .brand, .brand:hover {
+      color: #24132F;
+      text-decoration: none;
+    }
+    .card {
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+      padding: 14px 10px;
+      margin: 9px 0;
+    }
+    .card-title {
+      margin-top: 0;
+    }
+    .card-metadata {
+      margin-bottom: 5px;
+    }
+    .card-metadata .name {
+      font-size: 18px;
+      margin-right: 15px;
+    }
+    .card-metadata .time {
+      color: #9B9B9B;
+    }
+    .leave-comment textarea {
+      margin-bottom: 12px;
+    }
+    .leave-comment input {
+      width: 300px;
+      margin-bottom: 10px;
+    }
+    .leave-comment {
+      margin: 0;
+    }
+    .yellow {
+      background-color: #FEC63E;
+    }
+    .green {
+      background-color: #ADD4CE;
+    }
+    .peach {
+      background-color: #FFA08A;
+    }
+    .tags {
+      display: flex;
+      flex: 0 0 auto;
+      margin-bottom: 10px;
+    }
+    .tag {
+      height: 20px;
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    label {
+    	display: block;
+    }
+    .form-control {
+    	width: 300px;
+    }
+  </style>
+
+</head>
+<body class="flex-column">
+  <div class="flex-row header">
+    <a href="/" class="brand">
+      <div><img src="/static/Logo.svg" class="logo">WiscCollab</div>
+    </a>
+  </div>
+  <div class="flex-row">
+    <div class="flex-column main">
+      <h1>Submit a Project</h1>
+      <div class="flex-column card">
+      	<form action="/create_project" method="POST">{% csrf_token %}
+      		<p><label for="id_title">Project Title:</label> <input class="form-control" id="id_title" name="title" type="text" /></p>
+					<p><label for="id_description">Description:</label> <textarea class="form-control" cols="40" id="id_description" name="description" rows="10"></textarea></p>
+    			<p><label for="id_owner">Name:</label> <input id="id_owner" class="form-control" name="owner" type="text" /></p>
+      		<p><label for="id_owner_role">Role:</label> <input id="id_owner_role" class="form-control" name="owner_role" type="text" /></p>
+      		<p><label for="id_owner_email">Email:</label> <input id="id_owner_email" class="form-control" name="owner_email" type="text" /></p>
+		      <p><label for="id_seeking_designer">Seeking designer:</label> <input id="id_seeking_designer" name="seeking_designer" type="checkbox" /></p>
+		      <p><label for="id_seeking_developer">Seeking developer:</label> <input id="id_seeking_developer" name="seeking_developer" type="checkbox" /></p>
+		      <p><label for="id_seeking_business">Seeking business:</label> <input id="id_seeking_business" name="seeking_business" type="checkbox" /></p>
+		       <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
