@@ -1,9 +1,9 @@
 {% for project in projects %}
-    <p>{{ project.title }}</p>
-    <p>
-      {{ project.owner_role }} seeking
-      {% for wanted in project.wanted_set.all %}
-        {{ wanted.role }}
-      {% endfor %}
-    </p>
+  <p>{{ project.title }}</p>
+  <p>
+    {{ project.owner_role }} seeking
+    {% for wanted in project.wanted_set.all %}
+      {{ wanted.role }}
+    {% endfor %}
+  </p>
 {% endfor %}
