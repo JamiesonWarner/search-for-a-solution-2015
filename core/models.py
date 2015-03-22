@@ -22,6 +22,18 @@ class Project(models.Model):
   tags = models.ManyToManyField(Tag)
   is_sponsored = models.BooleanField(default=False)
   is_completed = models.BooleanField(default=False)
+  created_at = models.DateTimeField(auto_now_add=True)
+
+  # Should be a template tag?
+  def color(self):
+    if self.owner_role == 'business':
+      return 'peach'
+    elif self.owner_role == 'developer':
+      return 'yellow'
+    elif self.owner_role == 'designer':
+      return 'green'
+    return 'none'
+
   def __unicode__(self):
     return self.title
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>WiscCollab</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -33,10 +33,12 @@
     .logo {
       margin-right: 20px;
     }
-    .main {
-      flex: 4;
+    .content {
       padding-left: 85px;
       padding-top: 35px;
+    }
+    .main {
+      flex: 4;
     }
     .tagline {
       font-size: 24px;
@@ -109,81 +111,94 @@
     .add-project {
       text-transform: uppercase;
       width: 200px;
-      height: 50px;
+      height: 40px;
       background-color: #F2520D;
       border: 0px;
       border-radius: 8px;
       font-size: 18px;
       color: #FFFFFF;
     }
+    .search-box {
+      margin-top: 17px;
+      height: auto;
+      width: 200px;
+      background-color: #FFFFFF;
+      border-radius: 6px;
+    }
+    .search-header {
+      margin-left: 15px;
+      margin-top: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #4A4A4A;
+      text-transform: uppercase;
+    }
+    .search-roles {
+      margin-left: 15px;
+      color: #24132F;
+    }
+    .search-role {
+      display: flex;
+      margin-bottom: 5px;
+    }
+    .role-checkbox {
+      flex: 0 0 20px;
+    }
+    .search-input {
+      margin-left: 15px;
+      margin-bottom: 20px;
+    }
+    .search-input input {
+      border-radius: 5px;
+      border-style: solid;
+      border-width: 1px;
+    }
+    *::-webkit-input-placeholder {
+      padding-left: 10px;
+    }
   </style>
 
 </head>
 <body class="flex-column">
   <div class="flex-row header">
-    <div><img class="logo" src="/Users/Dave/Downloads/logo.svg">WiscCollab</div>
+    <div><img class="logo" src="static/Logo.svg">WiscCollab</div>
   </div>
-  <div class="flex-row">
+  <div class="flex-row content">
     <div class="flex-column main">
       <div class="tagline">Merging skills and bringing ideas to life</div>
 
-      <div class="flex-row post">
-        <div class="bar yellow"></div>
-        <div class="flex-row project-content">
-          <div class="flex-column">
-            <div class="project-title">Zombie iOS Game</div>
-            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
-          </div>
-          <div class="flex-column comments">
-            <img src="/Users/Dave/Downloads/comments.svg">
-            <div class="comments-text">7 comments</div>
-          </div>
-          <div class="flex-column center">
-            <div class="tag green">#art</div>
-            <div class="tag peach">#bus</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex-row post">
-        <div class="bar peach"></div>
-        <div class="flex-row project-content">
-          <div class="flex-column">
-            <div class="project-title">Logo Design for Student Startups</div>
-            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
-          </div>
-          <div class="flex-column comments">
-            <img src="/Users/Dave/Downloads/comments.svg">
-            <div class="comments-text">3 comments</div>
-          </div>
-          <div class="flex-column center">
-            <div class="tag green">#art</div>
+      {% for project in projects %}
+        <div class="flex-row post">
+          <div class="bar {{ project.color }}"></div>
+          <div class="flex-row project-content">
+            <div class="flex-column">
+              <div class="project-title">{{ project.title }}</div>
+              <div class="project-metadata">Submitted 3 days ago by {{ project.owner }}</div>
+            </div>
+            <div class="flex-column comments">
+              <img src="static/comments.svg">
+              <div class="comments-text">7 comments</div>
+            </div>
+            <div class="flex-column center">
+              <div class="tag green">#art</div>
+              <div class="tag peach">#bus</div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="flex-row post">
-        <div class="bar green"></div>
-        <div class="flex-row project-content">
-          <div class="flex-column">
-            <div class="project-title">Theater Project Manager</div>
-            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
-          </div>
-          <div class="flex-column comments">
-            <img src="/Users/Dave/Downloads/comments.svg">
-            <div class="comments-text">7 comments</div>
-          </div>
-          <div class="flex-column center">
-            <div class="tag peach">#bus</div>
-          </div>
-        </div>
-      </div>
-
-
+      {% endfor %}
     </div>
     <div class="flex-column other">
       <button class="add-project">Add a Project</button>
-      <div>Post Project</div>
+      <div class="search-box">
+        <div class="search-header">I am a...</div>
+        <div class="flex-column search-roles">
+          <div class="search-role"><input type="checkbox" class="role-checkbox">Developer</div>
+          <div class="search-role"><input type="checkbox" class="role-checkbox">Designer</div>
+          <div class="search-role"><input type="checkbox" class="role-checkbox">Businessperson</div>
+        </div>
+        <div class="search-header">Looking for...</div>
+        <div class="search-input"><input type="text" placeholder="Search"></div>
+      </div>
     </div>
   </div>
 </body>
