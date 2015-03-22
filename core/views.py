@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework.views import APIView
 from rest_framework import generics
 from .forms import ProjectForm
-from .models import Project
+from .models import Project, Tag
 
 def index(request):
-  projects = Project.objects.prefetch_related('wanted_set').all()
+  projects = Project.objects.prefetch_related('wanted_set').all().order_by('-created_at')
   return render(request, 'index.html', { 'projects': projects })
 
 def project_details(request, project_id):
@@ -28,6 +28,12 @@ def create_project(request):
     try:
       project.full_clean()
       project.save()
+      if 'seeking_designer' in request.POST:
+        project.tags.add(Tag.objects.get(name='designer'))
+      if 'seeking_developer' in request.POST:
+        project.tags.add(Tag.objects.get(name='developer'))
+      if 'seeking_business' in request.POST:
+        project.tags.add(Tag.objects.get(name='business'))
       return redirect('/')
     except Exception as e:
       print e

@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +77,6 @@
     .project-title {
       font-size: 36px;
       font-weight: 700;
-      margin-top: 25px;
     }
     .project-metadata {
       color: #9B9B9B;
@@ -85,13 +86,15 @@
       margin-left: auto;
       margin-right: 35px;
       color: #9B9B9B;
-      margin-top: 25px;
     }
     .comments-text {
       margin-top: 10px;
     }
     .center {
       align-items: center;
+      justify-content: center;
+    }
+    .vertically-center {
       justify-content: center;
     }
     .tag {
@@ -171,17 +174,26 @@
         <div class="flex-row post">
           <div class="bar {{ project.color }}"></div>
           <div class="flex-row project-content">
-            <div class="flex-column">
+            <div class="flex-column vertically-center">
               <div class="project-title">{{ project.title }}</div>
-              <div class="project-metadata">Submitted 3 days ago by {{ project.owner }}</div>
+              <div class="project-metadata">Submitted {{ project.created_at|naturaltime }} by {{ project.owner }}</div>
             </div>
-            <div class="flex-column comments">
+            <div class="flex-column comments center">
               <img src="static/comments.svg">
               <div class="comments-text">7 comments</div>
             </div>
             <div class="flex-column center">
-              <div class="tag green">#art</div>
-              <div class="tag peach">#bus</div>
+              {% for tag in project.tags.all %}
+                {% if tag.name == 'designer' %}
+                  <div class="tag green">#art</div>
+                {% endif %}
+                {% if tag.name == 'developer' %}
+                  <div class="tag yellow">#dev</div>
+                {% endif %}
+                {% if tag.name == 'business' %}
+                  <div class="tag peach">#bus</div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
