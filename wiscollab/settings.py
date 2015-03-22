@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +54,13 @@ ROOT_URLCONF = 'wiscollab.urls'
 
 WSGI_APPLICATION = 'wiscollab.wsgi.application'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
