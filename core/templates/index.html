@@ -1,5 +1,5 @@
 {% for project in projects %}
-  <p>{{ project.title }}</p>
+  <p><a href="{% url 'core.views.project_details' project.id %}">{{ project.title }}</a></p>
   <p>
     {{ project.owner_role }} seeking
     {% for wanted in project.wanted_set.all %}
