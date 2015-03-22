@@ -61,13 +61,13 @@
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
     }
-    .yellow {
+    .developer {
       background-color: #FEC63E;
     }
-    .green {
+    .designer {
       background-color: #ADD4CE;
     }
-    .peach {
+    .business {
       background-color: #FFA08A;
     }
     .project-content {
@@ -164,7 +164,32 @@
       padding-left: 10px;
     }
   </style>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#checkboxes').change(function() {
+      var checkboxes = {
+        developer: $('#checkbox-developer').is(':checked'),
+        business: $('#checkbox-business').is(':checked'),
+        designer: $('#checkbox-designer').is(':checked')
+      }
 
+      var posts = $('.main>.post');
+      posts.each(function() {
+        var post = $(this);
+        var tagType = post.find('.tag')[0].classList[1];
+        if (checkboxes[tagType]) {
+          if (post.hasClass('hidden')) {
+            post.removeClass('hidden');
+          }
+        } else {
+          if (!post.hasClass('hidden')) {
+            post.addClass('hidden');
+          }
+        }
+      })
+    });
+  })
+  </script>
 </head>
 <body class="flex-column">
   <div class="flex-row header">
@@ -175,42 +200,42 @@
       <div class="tagline">Merging skills and bringing ideas to life</div>
 
       {% for project in projects %}
-        <div class="flex-row post">
-          <div class="bar {{ project.color }}"></div>
-          <div class="flex-row project-content">
-            <div class="flex-column vertically-center">
-              <div class="project-title"><a href="/{{ project.id }}">{{ project.title }}</a></div>
-              <div class="project-metadata">Submitted {{ project.created_at|naturaltime }} by {{ project.owner }}</div>
-            </div>
-            <div class="flex-column comments center">
-              <img src="static/comments.svg">
-              <div class="comments-text">{{ project.comment_set.all|length }} comments</div>
-            </div>
-            <div class="flex-column center">
-              {% for tag in project.tags.all %}
-                {% if tag.name == 'designer' %}
-                  <div class="tag green">#art</div>
-                {% endif %}
-                {% if tag.name == 'developer' %}
-                  <div class="tag yellow">#dev</div>
-                {% endif %}
-                {% if tag.name == 'business' %}
-                  <div class="tag peach">#bus</div>
-                {% endif %}
-              {% endfor %}
-            </div>
+      <div class="flex-row post">
+        <div class="bar {{ project.owner_role }}"></div>
+        <div class="flex-row project-content">
+          <div class="flex-column vertically-center">
+            <div class="project-title"><a href="/{{ project.id }}">{{ project.title }}</a></div>
+            <div class="project-metadata">Submitted {{ project.created_at|naturaltime }} by {{ project.owner }}</div>
+          </div>
+          <div class="flex-column comments center">
+            <img src="static/comments.svg">
+            <div class="comments-text">{{ project.comment_set.all|length }} comments</div>
+          </div>
+          <div class="flex-column center">
+            {% for tag in project.tags.all %}
+              {% if tag.name == 'designer' %}
+                <div class="tag designer">#art</div>
+              {% endif %}
+              {% if tag.name == 'developer' %}
+                <div class="tag developer">#dev</div>
+              {% endif %}
+              {% if tag.name == 'business' %}
+                <div class="tag business">#bus</div>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
+      </div>
       {% endfor %}
     </div>
     <div class="flex-column other">
       <button class="add-project">Add a Project</button>
       <div class="search-box">
         <div class="search-header">I am a...</div>
-        <div class="flex-column search-roles">
-          <div class="search-role"><input type="checkbox" class="role-checkbox">Developer</div>
-          <div class="search-role"><input type="checkbox" class="role-checkbox">Designer</div>
-          <div class="search-role"><input type="checkbox" class="role-checkbox">Businessperson</div>
+        <div class="flex-column search-roles" id="checkboxes">
+          <div class="search-role"><input id="checkbox-developer" checked type="checkbox" class="role-checkbox">Developer</div>
+          <div class="search-role"><input id="checkbox-designer" checked type="checkbox" class="role-checkbox">Designer</div>
+          <div class="search-role"><input id="checkbox-business" checked type="checkbox" class="role-checkbox">Businessperson</div>
         </div>
         <div class="search-header">Looking for...</div>
         <div class="search-input"><input type="text" placeholder="Search"></div>
