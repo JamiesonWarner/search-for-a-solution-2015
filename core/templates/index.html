@@ -159,8 +159,6 @@
       border-radius: 5px;
       border-style: solid;
       border-width: 1px;
-    }
-    *::-webkit-input-placeholder {
       padding-left: 10px;
     }
   </style>
@@ -246,7 +244,7 @@
       {% endfor %}
     </div>
     <div class="flex-column other">
-      <button class="add-project">Add a Project</button>
+      <a href="/create_project"><button class="add-project">Add a Project</button></a>
       <div class="search-box">
         <div class="search-header">I am a...</div>
         <div class="flex-column search-roles" id="checkboxes">
