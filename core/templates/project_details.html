@@ -66,12 +66,15 @@
     .card-metadata .time {
       color: #9B9B9B;
     }
-    textarea {
+    .leave-comment textarea {
       margin-bottom: 12px;
     }
+    .leave-comment input {
+      width: 300px;
+      margin-bottom: 10px;
+    }
     .leave-comment {
-      margin: 0 0 0 0;
-      padding: 0 0 0 0;
+      margin: 0;
     }
     .yellow {
       background-color: #FEC63E;
@@ -142,7 +145,8 @@
 
       <div class="card">
         <div class="form-group leave-comment">
-          <textarea class="form-control" rows="2"></textarea>
+          <input class="form-control" type="text" placeholder="Name"></input>
+          <textarea class="form-control" rows="2" placeholder="Comment"></textarea>
           <button type="submit" class="btn btn-default">Submit</button>
         </div>
       </div>
