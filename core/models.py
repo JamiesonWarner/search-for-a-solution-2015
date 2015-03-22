@@ -8,6 +8,8 @@ class Tag(models.Model):
 
 class Role(models.Model):
   name = models.TextField()
+  color = models.TextField()
+
   def __unicode__(self):
     return self.name
 
@@ -31,3 +33,4 @@ class Wanted(models.Model):
 class Comment(models.Model):
   user = models.TextField()
   text = models.TextField()
+  project = models.ForeignKey(Project)
