@@ -22,13 +22,16 @@
     }
     .header {
       padding-top: 25px;
-      padding-left: 75px;
+      padding-left: 85px;
       height: 125px;
       background-color: #FFFFFF;
       box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.50);
       font-weight: 700;
       font-size: 36px;
       line-height: 46px;
+    }
+    .logo {
+      margin-right: 20px;
     }
     .main {
       flex: 4;
@@ -38,32 +41,148 @@
     .tagline {
       font-size: 24px;
       line-height: 32px;
+      margin-bottom: 25px;
     }
     .post {
       height: 125px;
       background-color: #FFFFFF;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
+    }
+    .bar {
+      height: 100%;
+      width: 10px;
+      border-radius: 6px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+    .yellow {
+      background-color: #FEC63E;
+    }
+    .green {
+      background-color: #ADD4CE;
+    }
+    .peach {
+      background-color: #FFA08A;
+    }
+    .project-content {
+      margin-left: 25px;
+      width: 100%;
+    }
+    .project-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 25px;
+    }
+    .project-metadata {
+      color: #9B9B9B;
+      font-size: 14px;
+    }
+    .comments {
+      margin-left: auto;
+      margin-right: 35px;
+      color: #9B9B9B;
+      margin-top: 25px;
+    }
+    .comments-text {
+      margin-top: 10px;
+    }
+    .center {
+      align-items: center;
+      justify-content: center;
+    }
+    .tag {
+      width: 50px;
+      height: 20px;
+      margin-right: 25px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .other {
       flex: 1;
       margin-right: 60px;
       margin-left: 35px;
     }
+    .add-project {
+      text-transform: uppercase;
+      width: 200px;
+      height: 50px;
+      background-color: #F2520D;
+      border: 0px;
+      border-radius: 8px;
+      font-size: 18px;
+      color: #FFFFFF;
+    }
   </style>
 
 </head>
 <body class="flex-column">
   <div class="flex-row header">
-    <div><img src="/Users/Dave/Downloads/logo.svg">WiscCollab</div>
+    <div><img class="logo" src="/Users/Dave/Downloads/logo.svg">WiscCollab</div>
   </div>
   <div class="flex-row">
     <div class="flex-column main">
       <div class="tagline">Merging skills and bringing ideas to life</div>
-      <div class="post yellow">Project A</div>
-      <div class="post peach">Project B</div>
-      <div class="post green">Project C</div>
+
+      <div class="flex-row post">
+        <div class="bar yellow"></div>
+        <div class="flex-row project-content">
+          <div class="flex-column">
+            <div class="project-title">Zombie iOS Game</div>
+            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
+          </div>
+          <div class="flex-column comments">
+            <img src="/Users/Dave/Downloads/comments.svg">
+            <div class="comments-text">7 comments</div>
+          </div>
+          <div class="flex-column center">
+            <div class="tag green">#art</div>
+            <div class="tag peach">#bus</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-row post">
+        <div class="bar peach"></div>
+        <div class="flex-row project-content">
+          <div class="flex-column">
+            <div class="project-title">Logo Design for Student Startups</div>
+            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
+          </div>
+          <div class="flex-column comments">
+            <img src="/Users/Dave/Downloads/comments.svg">
+            <div class="comments-text">3 comments</div>
+          </div>
+          <div class="flex-column center">
+            <div class="tag green">#art</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-row post">
+        <div class="bar green"></div>
+        <div class="flex-row project-content">
+          <div class="flex-column">
+            <div class="project-title">Theater Project Manager</div>
+            <div class="project-metadata">Submitted 3 days ago by Dave Sescleifer</div>
+          </div>
+          <div class="flex-column comments">
+            <img src="/Users/Dave/Downloads/comments.svg">
+            <div class="comments-text">7 comments</div>
+          </div>
+          <div class="flex-column center">
+            <div class="tag peach">#bus</div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
     <div class="flex-column other">
-      <button>Add a Project</button>
+      <button class="add-project">Add a Project</button>
       <div>Post Project</div>
     </div>
   </div>
