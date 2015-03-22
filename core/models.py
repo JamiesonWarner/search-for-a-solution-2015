@@ -34,6 +34,9 @@ class Project(models.Model):
       return 'green'
     return 'none'
 
+  def owner_first_name(self):
+    return self.owner.split(' ')[0]
+
   def __unicode__(self):
     return self.title
 

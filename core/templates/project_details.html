@@ -101,6 +101,11 @@
       align-items: center;
       justify-content: center;
     }
+    .interested {
+      margin-top: 10px;
+      margin-bottom: 0px;
+      color: #9B9B9B;
+    }
   </style>
 
 </head>
@@ -129,7 +134,8 @@
             {% endif %}
           {% endfor %}
         </div>
-        {{ project.description }}
+        <p>{{ project.description }}</p>
+        <p class="interested">Interested? <a href="mailto:{{ project.owner_email }}">Click here</a> to email {{ project.owner_first_name }}.
       </div>
 
       <h3>Comments</h3>
