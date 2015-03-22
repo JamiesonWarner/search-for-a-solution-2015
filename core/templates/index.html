@@ -78,6 +78,10 @@
       font-size: 36px;
       font-weight: 700;
     }
+    .project-title a {
+      color: #24132F;
+      text-decoration: none;
+    }
     .project-metadata {
       color: #9B9B9B;
       font-size: 14px;
@@ -175,12 +179,12 @@
           <div class="bar {{ project.color }}"></div>
           <div class="flex-row project-content">
             <div class="flex-column vertically-center">
-              <div class="project-title">{{ project.title }}</div>
+              <div class="project-title"><a href="/{{ project.id }}">{{ project.title }}</a></div>
               <div class="project-metadata">Submitted {{ project.created_at|naturaltime }} by {{ project.owner }}</div>
             </div>
             <div class="flex-column comments center">
               <img src="static/comments.svg">
-              <div class="comments-text">7 comments</div>
+              <div class="comments-text">{{ project.comment_set.all|length }} comments</div>
             </div>
             <div class="flex-column center">
               {% for tag in project.tags.all %}
