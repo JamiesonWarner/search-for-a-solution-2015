@@ -166,7 +166,16 @@
   </style>
   <script type="text/javascript">
   $(document).ready(function() {
+    $('.search-input input').on('change keyup paste', function() {
+      refreshPosts();
+    });
+
     $('#checkboxes').change(function() {
+      refreshPosts();
+    });
+
+    function refreshPosts() {
+
       var checkboxes = {
         developer: $('#checkbox-developer').is(':checked'),
         business: $('#checkbox-business').is(':checked'),
@@ -177,7 +186,15 @@
       posts.each(function() {
         var post = $(this);
         var tagType = post.find('.tag')[0].classList[1];
-        if (checkboxes[tagType]) {
+        var makeVisible = checkboxes[tagType];
+
+        var searchInput = $('.search-input input').val();
+        if (searchInput) {
+          var titleText = post.find('.project-title>a').text();
+          makeVisible = makeVisible && titleText.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
+        }
+
+        if (makeVisible) {
           if (post.hasClass('hidden')) {
             post.removeClass('hidden');
           }
@@ -187,7 +204,7 @@
           }
         }
       })
-    });
+    }
   })
   </script>
 </head>
